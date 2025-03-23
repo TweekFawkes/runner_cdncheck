@@ -29,4 +29,4 @@ webform:
 
 launch:
   type: binary
-  command: /go/bin/cdncheck -v -nc -resp ${selector} -o output.txt -j output.json
+  command: /go/bin/cdncheck -v -nc -resp ${selector} -o outputs/output.txt -j outputs/output.json
