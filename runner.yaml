@@ -1,0 +1,32 @@
+runner:
+  name: CDN, Cloud, and WAF Detection
+  description: Tool for identifying the technology associated with dns or ip network addresses.
+  version: 0.0.1
+
+build:
+  commands: |
+    echo "START: Building cdncheck"
+    apt-get update
+    apt-get install -y ca-certificates
+    apt-get install -y build-essential
+    apt-get install -y git
+    wget https://go.dev/dl/go1.22.6.linux-amd64.tar.gz && tar -C /usr/local -xzf go1.22.6.linux-amd64.tar.gz && rm go1.22.6.linux-amd64.tar.gz
+    ENV GOROOT=/usr/local/go
+    ENV GOPATH=/go
+    ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+    ENV GO111MODULE=on
+    ENV CGO_ENABLED=1
+    mkdir -p /go/src
+    mkdir -p /go/bin
+    mkdir -p /tmp/.tmp
+    cd /tmp/.tmp && /usr/local/go/bin/go install -v github.com/projectdiscovery/cdncheck/cmd/cdncheck@latest
+    echo "END: Building cdncheck"
+
+webform:
+  - name: selector
+    prompt: CDN, Cloud, and WAF Detection
+    type: text
+
+launch:
+  type: binary
+  command: /go/bin/cdncheck -v -nc -resp ${selector} -o output.txt -j output.json
