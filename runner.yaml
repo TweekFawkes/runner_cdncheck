@@ -23,8 +23,8 @@ build:
     echo "END: Building cdncheck"
 
 webform:
-  - name: selector
-    prompt: CDN, Cloud, and WAF Detection
+  - name: domain_or_ip
+    prompt: Domain or IP Address
     type: text
 
 launch:
