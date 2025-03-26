@@ -24,7 +24,7 @@ build:
 
 webform:
   - name: domain_or_ip
-    prompt: Domain or IP Address
+    prompt: Domain or IP
     type: text
 
 launch:
